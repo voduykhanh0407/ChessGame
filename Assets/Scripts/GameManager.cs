@@ -19,54 +19,58 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
     }
 
     private void Start()
     {
-
+        
     }
 
-    public void PlayerShowMove(Chess chess)
+    public IEnumerator PlayerShowMove(Chess chess)
     {
         if (chess.type == Chess.ChessType.Bishop)
         {
-            chess.iChess = chess.gameObject.AddComponent<Bishop>();
             CheckColor(chess);
-            chess.iChess.ShowChessMove();
+            chess = chess. gameObject.AddComponent<Bishop>();
+            chess.ShowChessMove();
         }
         if (chess.type == Chess.ChessType.Rook)
         {
-            chess.iChess = chess.gameObject.AddComponent<Rook>();
             CheckColor(chess);
-            chess.iChess.ShowChessMove();
+            chess = chess.gameObject.AddComponent<Rook>();
+            chess.ShowChessMove();
         }
+        yield return new WaitForSeconds(0.5f);
+        chess.ChessMove();
     }
 
     public void PlayerMove(Chess chess)
     {
-        chess.iChess.ChessMove();
+        chess.ChessMove();
     }
 
-    public void EnemyShowMove(Chess chess)
+    public IEnumerator EnemyShowMove(Chess chess)
     {
         if (chess.type == Chess.ChessType.Bishop)
         {
-            chess.iChess = chess.gameObject.AddComponent<Bishop>();
             CheckColor(chess);
-            chess.iChess.ShowChessMove();
+            chess = chess.gameObject.AddComponent<Bishop>();
+            chess.ShowChessMove();
         }
         if (chess.type == Chess.ChessType.Rook)
         {
-            chess.iChess = chess.gameObject.AddComponent<Rook>();
             CheckColor(chess);
-            chess.iChess.ShowChessMove();
+            chess = chess.gameObject.AddComponent<Rook>();
+            chess.ShowChessMove();
         }
+        yield return new WaitForSeconds(0.5f);
+        chess.ChessMove();
     }
 
     public void EnemyMove(Chess chess)
     {
-        chess.iChess.ChessMove();
+        chess.ChessMove();
     }
 
     public void CheckColor(Chess chess)

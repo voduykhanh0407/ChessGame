@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class Bishop : Chess
 {
-    private int xBoard = -1;
-    private int yBoard = -1;
-
-    public int index = -1;
-    public Vector2 random;
-
-    public List<Vector2> moves = new List<Vector2>();
-
-    public override void CheckAndAddMoveToList(Vector2 pos)
+    public Bishop() : base()
     {
-        if (GridManager.Instance.PositionOnBoard(pos))
-        {
-            moves.Add(pos);
-        }
+        //base.GetAllPositionMove();
+        //base.GetPosition();
+        //base.ShowChessMove();
+        //base.ChessMove();
     }
 
     public override void GetAllPositionMove()
@@ -66,7 +58,7 @@ public class Bishop : Chess
         }
         else
             transform.position = new Vector3(random.x, random.y, 0);
-        
+
         GridManager.Instance.BaseColor(moves);
         moves = null;
     }

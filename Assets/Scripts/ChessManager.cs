@@ -67,9 +67,9 @@ public class ChessManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (mainPlayer != null && mainPlayer.iChess != null)
+            if (mainPlayer != null)
             {
-                mainPlayer.iChess.ChessMove();
+                mainPlayer.ChessMove();
                 enemyTurn = true;
             }
             if (enemyTurn)
@@ -93,10 +93,6 @@ public class ChessManager : MonoBehaviour
 
             mainPlayer.PlayerShowMove();
 
-            yield return new WaitForSeconds(0.5f);
-
-            mainPlayer.iChess.ChessMove();
-
             enemyTurn = true;
         }
         
@@ -110,8 +106,6 @@ public class ChessManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
                 enemy.EnemyShowMove();
-                yield return new WaitForSeconds(0.5f);
-                enemy.iChess.ChessMove();
             }
             enemyTurn = false;
         }

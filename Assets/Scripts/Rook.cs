@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class Rook : Chess
 {
-    private int xBoard = -1;
-    private int yBoard = -1;
-
-    public int index = -1;
-    public Vector2 random;
-
-    public List<Vector2> moves = new List<Vector2>();
-
-    public override void CheckAndAddMoveToList(Vector2 pos)
+    public Rook(): base()
     {
-        if (GridManager.Instance.PositionOnBoard(pos))
-        {
-            moves.Add(pos);
-        }
+        //base.GetAllPositionMove();
+        //base.GetPosition();
+        //base.ShowChessMove();
+        //base.ChessMove();
     }
 
     public override void GetAllPositionMove()
@@ -42,12 +34,10 @@ public class Rook : Chess
         }
         GameManager.Instance.ShowColor(moves);
     }
-
     public override void GetPosition()
     {
         xBoard = (int)transform.position.x;
         yBoard = (int)transform.position.y;
-
     }
 
     public override void ShowChessMove()
@@ -59,6 +49,8 @@ public class Rook : Chess
 
     public override void ChessMove()
     {
+        Debug.Log(GameManager.kill);
+        Debug.Log(random.x + " , " + random.y);
         if (GameManager.kill == 1)
         {
             transform.position = GameManager.Instance.killPos;
