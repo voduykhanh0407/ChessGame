@@ -428,6 +428,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   isPlayer: 1
+  xBoard: -1
+  yBoard: -1
+  index: -1
+  random: {x: 0, y: 0}
+  moves: []
 --- !u!61 &1000647827
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -614,6 +619,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   isPlayer: 0
+  xBoard: -1
+  yBoard: -1
+  index: -1
+  random: {x: 0, y: 0}
+  moves: []
 --- !u!212 &1224058643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -976,6 +986,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   isPlayer: 0
+  xBoard: -1
+  yBoard: -1
+  index: -1
+  random: {x: 0, y: 0}
+  moves: []
 --- !u!212 &1879347921
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -8,10 +8,34 @@ public class Bishop : Chess
     {
         //base.GetAllPositionMove();
         //base.GetPosition();
-        //base.ShowChessMove();
+        //base.ShowChessMove(Instance);
         //base.ChessMove();
+        //base.PlayerShowMove(Instance);
+        //base.EnemyShowMove(Instance);
     }
+    public override void PlayerShowMove(Chess chess)
+    {
+        if (chess.type == ChessType.Bishop)
+        {
+            GameManager.Instance.CheckColor(chess);
+            chess = chess.gameObject.AddComponent<Bishop>();
+            chess.ShowChessMove(chess);
 
+            StartCoroutine(chess.ChessMove());
+        }
+            
+    }
+    public override void EnemyShowMove(Chess chess)
+    {
+        if (chess.type == ChessType.Bishop)
+        {
+            GameManager.Instance.CheckColor(chess);
+            chess = chess.gameObject.AddComponent<Bishop>();
+            chess.ShowChessMove(chess);
+
+            StartCoroutine(chess.ChessMove());
+        }
+    }
     public override void GetAllPositionMove()
     {
         GetPosition();
@@ -41,25 +65,10 @@ public class Bishop : Chess
         yBoard = (int)transform.position.y;
     }
 
-    public override void ShowChessMove()
+    public override void ShowChessMove(Chess chess)
     {
         GetAllPositionMove();
         index = Random.Range(0, moves.Count - 1);
         random = new Vector2(moves[index].x, moves[index].y);
-    }
-
-    public override void ChessMove()
-    {
-        if (GameManager.kill == 1)
-        {
-            transform.position = GameManager.Instance.killPos;
-            GameManager.kill = -1;
-            GameManager.Instance.CheckKill();
-        }
-        else
-            transform.position = new Vector3(random.x, random.y, 0);
-
-        GridManager.Instance.BaseColor(moves);
-        moves = null;
     }
 }

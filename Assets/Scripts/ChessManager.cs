@@ -55,7 +55,7 @@ public class ChessManager : MonoBehaviour
                 {
                     if (chess.isPlayer)
                     {
-                        chess.PlayerShowMove();
+                        //chess.PlayerShowMove();
                         mainPlayer = chess;
                         return;
                     }
@@ -89,9 +89,9 @@ public class ChessManager : MonoBehaviour
     {
         if (!enemyTurn)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
-            mainPlayer.PlayerShowMove();
+            mainPlayer.PlayerShowMove(mainPlayer);
 
             enemyTurn = true;
         }
@@ -104,8 +104,9 @@ public class ChessManager : MonoBehaviour
         {
             foreach (var enemy in enemies)
             {
-                yield return new WaitForSeconds(0.5f);
-                enemy.EnemyShowMove();
+                yield return new WaitForSeconds(0.3f);
+
+                enemy.EnemyShowMove(enemy);
             }
             enemyTurn = false;
         }

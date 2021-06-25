@@ -22,57 +22,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        
-    }
-
-    public IEnumerator PlayerShowMove(Chess chess)
-    {
-        if (chess.type == Chess.ChessType.Bishop)
-        {
-            CheckColor(chess);
-            chess = chess. gameObject.AddComponent<Bishop>();
-            chess.ShowChessMove();
-        }
-        if (chess.type == Chess.ChessType.Rook)
-        {
-            CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Rook>();
-            chess.ShowChessMove();
-        }
-        yield return new WaitForSeconds(0.5f);
-        chess.ChessMove();
-    }
-
-    public void PlayerMove(Chess chess)
-    {
-        chess.ChessMove();
-    }
-
-    public IEnumerator EnemyShowMove(Chess chess)
-    {
-        if (chess.type == Chess.ChessType.Bishop)
-        {
-            CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Bishop>();
-            chess.ShowChessMove();
-        }
-        if (chess.type == Chess.ChessType.Rook)
-        {
-            CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Rook>();
-            chess.ShowChessMove();
-        }
-        yield return new WaitForSeconds(0.5f);
-        chess.ChessMove();
-    }
-
-    public void EnemyMove(Chess chess)
-    {
-        chess.ChessMove();
-    }
-
     public void CheckColor(Chess chess)
     {
         if (chess.isPlayer)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class Chess : MonoBehaviour
 
     public int index = -1;
 
+
     public Vector2 random = Vector2.zero;
 
     public List<Vector2> moves = new List<Vector2>();
@@ -29,14 +31,16 @@ public class Chess : MonoBehaviour
         Instance = this;
     }
 
-    public void PlayerShowMove()
+    public virtual void PlayerShowMove(Chess chess)
     {
-        StartCoroutine((GameManager.Instance.PlayerShowMove(this)));
+        chess.gameObject.AddComponent<Bishop>().PlayerShowMove(chess);
+        chess.gameObject.AddComponent<Rook>().PlayerShowMove(chess);
     }
 
-    public void EnemyShowMove()
+    public virtual void EnemyShowMove(Chess chess)
     {
-        StartCoroutine((GameManager.Instance.EnemyShowMove(this)));
+        chess.gameObject.AddComponent<Bishop>().EnemyShowMove(chess);
+        chess.gameObject.AddComponent<Rook>().EnemyShowMove(chess);
     }
 
     public virtual void CheckAndAddMoveToList(Vector2 pos)
@@ -57,13 +61,27 @@ public class Chess : MonoBehaviour
 
     }
 
-    public virtual void ShowChessMove()
+    public virtual void ShowChessMove(Chess chess)
     {
+
     }
 
-    public virtual void ChessMove()
+    public IEnumerator ChessMove()
     {
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log(GameManager.kill);
+        Debug.Log(random.x + " , " + random.y);
+        if (GameManager.kill == 1)
+        {
+            transform.position = GameManager.Instance.killPos;
+            GameManager.kill = -1;
+            GameManager.Instance.CheckKill();
+        }
+        else
+            transform.position = new Vector3(random.x, random.y, 0);
 
+        GridManager.Instance.BaseColor(moves);
+        moves = null;
     }
 
 
