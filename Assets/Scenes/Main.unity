@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b4c46bab8aba34b8625b6ad0aafcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTurn: 0
   loop: 1
 --- !u!4 &242608572
 Transform:
@@ -340,8 +339,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1000647825}
   - component: {fileID: 1000647824}
-  - component: {fileID: 1000647826}
   - component: {fileID: 1000647827}
+  - component: {fileID: 1000647826}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -423,7 +422,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000647823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bad7ebac0846234e855ef41c344fba6, type: 3}
+  m_Script: {fileID: 11500000, guid: c54476403fae22b4bac9e8507173a820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
@@ -570,8 +569,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1224058644}
   - component: {fileID: 1224058643}
-  - component: {fileID: 1224058642}
   - component: {fileID: 1224058641}
+  - component: {fileID: 1224058642}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Player
@@ -614,7 +613,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1224058640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bad7ebac0846234e855ef41c344fba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 120aacd487e102b488a54ebe0bdb8441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
@@ -732,8 +731,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947fafad1aaaf1f4694bcff72dc5f5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  enemies: []
+  mainPlayer: {fileID: 1000647826}
+  enemies:
+  - {fileID: 1879347920}
+  - {fileID: 1224058642}
   enemyTurn: 0
 --- !u!1 &1383564446
 GameObject:
@@ -937,8 +938,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1879347922}
   - component: {fileID: 1879347921}
-  - component: {fileID: 1879347920}
   - component: {fileID: 1879347919}
+  - component: {fileID: 1879347920}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Player
@@ -981,7 +982,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1879347918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bad7ebac0846234e855ef41c344fba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 120aacd487e102b488a54ebe0bdb8441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,20 +6,15 @@ public class Chess : MonoBehaviour
 {
     public enum ChessType { Rook, Bishop, Unknown }
 
-    //public IChess iChess;
-
     public ChessType type = ChessType.Unknown;
 
     public bool isPlayer;
-
-    //public Sprite sprite;
 
     public static Chess Instance;
     public int xBoard = -1;
     public int yBoard = -1;
 
     public int index = -1;
-
 
     public Vector2 random = Vector2.zero;
 
@@ -31,16 +25,14 @@ public class Chess : MonoBehaviour
         Instance = this;
     }
 
-    public virtual void PlayerShowMove(Chess chess)
+    public virtual void ChessMove(Chess chess)
     {
-        chess.gameObject.AddComponent<Bishop>().PlayerShowMove(chess);
-        chess.gameObject.AddComponent<Rook>().PlayerShowMove(chess);
+
     }
 
-    public virtual void EnemyShowMove(Chess chess)
+    public virtual void GetAllPositionMove()
     {
-        chess.gameObject.AddComponent<Bishop>().EnemyShowMove(chess);
-        chess.gameObject.AddComponent<Rook>().EnemyShowMove(chess);
+
     }
 
     public virtual void CheckAndAddMoveToList(Vector2 pos)
@@ -51,31 +43,27 @@ public class Chess : MonoBehaviour
         }
     }
 
-    public virtual void GetPosition()
+    public void GetPosition()
     {
-
+        xBoard = (int)transform.position.x;
+        yBoard = (int)transform.position.y;
     }
 
-    public virtual void GetAllPositionMove()
+    public void ShowChessMove()
     {
-
-    }
-
-    public virtual void ShowChessMove(Chess chess)
-    {
-
+        GetAllPositionMove();
+        index = Random.Range(0, moves.Count - 1);
+        random = new Vector2(moves[index].x, moves[index].y);
     }
 
     public IEnumerator ChessMove()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log(GameManager.kill);
-        Debug.Log(random.x + " , " + random.y);
         if (GameManager.kill == 1)
         {
             transform.position = GameManager.Instance.killPos;
             GameManager.kill = -1;
-            GameManager.Instance.CheckKill();
+            GameManager.Instance.CheckKill(this);
         }
         else
             transform.position = new Vector3(random.x, random.y, 0);
@@ -84,5 +72,17 @@ public class Chess : MonoBehaviour
         moves = null;
     }
 
-
+    public void CheckMove(List<Vector2> vector2)
+    {
+        if (isPlayer)
+        {
+            GridManager.Instance.ShowChessPossibleMove(vector2);
+            GameManager.Instance.OnPlayerKill(vector2);
+        }
+        else
+        {
+            GridManager.Instance.ShowChessPossibleDamage(vector2);
+            GameManager.Instance.OnEnemyKill(vector2);
+        }
+    }
 }

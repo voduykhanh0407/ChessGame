@@ -4,38 +4,13 @@ using UnityEngine;
 
 public class Bishop : Chess
 {
-    public Bishop() : base()
+    public override void ChessMove(Chess chess)
     {
-        //base.GetAllPositionMove();
-        //base.GetPosition();
-        //base.ShowChessMove(Instance);
-        //base.ChessMove();
-        //base.PlayerShowMove(Instance);
-        //base.EnemyShowMove(Instance);
-    }
-    public override void PlayerShowMove(Chess chess)
-    {
-        if (chess.type == ChessType.Bishop)
-        {
-            GameManager.Instance.CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Bishop>();
-            chess.ShowChessMove(chess);
+        chess.ShowChessMove();
 
-            StartCoroutine(chess.ChessMove());
-        }
-            
+        StartCoroutine(chess.ChessMove());
     }
-    public override void EnemyShowMove(Chess chess)
-    {
-        if (chess.type == ChessType.Bishop)
-        {
-            GameManager.Instance.CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Bishop>();
-            chess.ShowChessMove(chess);
 
-            StartCoroutine(chess.ChessMove());
-        }
-    }
     public override void GetAllPositionMove()
     {
         GetPosition();
@@ -56,19 +31,6 @@ public class Bishop : Chess
             CheckAndAddMoveToList(right_down);
             CheckAndAddMoveToList(left_up);
         }
-        GameManager.Instance.ShowColor(moves);
-    }
-
-    public override void GetPosition()
-    {
-        xBoard = (int)transform.position.x;
-        yBoard = (int)transform.position.y;
-    }
-
-    public override void ShowChessMove(Chess chess)
-    {
-        GetAllPositionMove();
-        index = Random.Range(0, moves.Count - 1);
-        random = new Vector2(moves[index].x, moves[index].y);
+        CheckMove(moves);
     }
 }

@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public bool enemyTurn = false;
-
     public bool loop = true;
-
-    public static Timer Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
-        enemyTurn = false;
         StartCoroutine(Timing());
     }
 
@@ -28,7 +18,12 @@ public class Timer : MonoBehaviour
         {
             yield return waitTime;
 
-            StartCoroutine(ChessManager.Instance.PlayerMoveTurn());
+            if (ChessManager.Instance.enemyTurn == false)
+            {
+                StartCoroutine(ChessManager.Instance.PlayerMoveTurn());
+
+                ChessManager.Instance.enemyTurn = true;
+            }
 
             yield return new WaitForSeconds(1f);
 

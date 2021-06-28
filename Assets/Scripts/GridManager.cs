@@ -113,7 +113,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void SpawnRandomChess(Chess chess)
+    public void RandomSpawn(Chess chess)
     {
         Vector2 vector2 = new Vector2(Random.Range(0, 7), Random.Range(0, 7));
         chess.transform.position = new Vector3(dictionary[vector2].transform.position.x, dictionary[vector2].transform.position.y, 0);
