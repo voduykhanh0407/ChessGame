@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int color = -1;
-
     public static int kill = -1;
 
     public Vector3 killPos = Vector3.zero;
@@ -19,44 +17,19 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
     }
 
-    public void CheckColor(Chess chess)
+    public void CheckKill(Chess chess)
     {
         if (chess.isPlayer)
         {
-            color = 1;
-        }
-        else
-            color = -1;
-    }
-
-    public void CheckKill()
-    {
-        if (color == 1)
-        {
             UIController.Instance.AddPlayerScore();
-            GridManager.Instance.SpawnRandomChess(enemyBox);
+            GridManager.Instance.RandomSpawn(enemyBox);
         }
         else
         {
             UIController.Instance.AddEnemyScore();
-            GridManager.Instance.SpawnRandomChess(playerBox);
-        }
-    }
-
-    public void ShowColor(List<Vector2> vector2)
-    {
-        if (color == 1)
-        {
-            GridManager.Instance.ShowChessPossibleMove(vector2);
-            OnPlayerKill(vector2);
-        }
-        else
-        {
-            GridManager.Instance.ShowChessPossibleDamage(vector2);
-            OnEnemyKill(vector2);
+            GridManager.Instance.RandomSpawn(playerBox);
         }
     }
 
@@ -66,12 +39,13 @@ public class GameManager : MonoBehaviour
         {
             foreach (var enemy in ChessManager.Instance.enemies)
             {
-                if ( vector2 == new Vector2(enemy.transform.position.x, enemy.transform.position.y))
+                if (vector2 == new Vector2(enemy.transform.position.x, enemy.transform.position.y))
                 {
                     kill = 1;
                     killPos = new Vector3(vector2.x, vector2.y, 0);
+
                     enemyBox = enemy;
-                    Debug.Log("Destroy enemy");
+
                     break;
                 }
             }
@@ -87,8 +61,8 @@ public class GameManager : MonoBehaviour
             {
                 kill = 1;
                 killPos = new Vector3(playerPos.x, playerPos.y, 0);
+
                 playerBox = ChessManager.Instance.mainPlayer;
-                Debug.Log("Destroy player");
             }
         }
     }

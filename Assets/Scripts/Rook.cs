@@ -4,45 +4,13 @@ using UnityEngine;
 
 public class Rook : Chess
 {
-    public Rook(): base()
+    public override void ChessMove(Chess chess)
     {
-        //base.GetAllPositionMove();
-        //base.GetPosition();
-        //base.ShowChessMove(Instance);
-        //base.ChessMove();
-        //base.PlayerShowMove(Instance);
-        //base.EnemyShowMove(Instance);
-    }
-    public override void PlayerShowMove(Chess chess)
-    {
-        if(chess.type == ChessType.Rook)
-        {
-            GameManager.Instance.CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Rook>();
-            chess.ShowChessMove(chess);
+        chess.ShowChessMove();
 
-            StartCoroutine(chess.ChessMove());
-        }
+        StartCoroutine(chess.ChessMove());
     }
 
-
-    public override void Fire()
-    {
-        base.Fire();
-        Debug.Log("this is fire from Rook");
-    }
-
-    public override void EnemyShowMove(Chess chess)
-    {
-        if (chess.type == ChessType.Rook)
-        {
-            GameManager.Instance.CheckColor(chess);
-            chess = chess.gameObject.AddComponent<Rook>();
-            chess.ShowChessMove(chess);
-
-            StartCoroutine(chess.ChessMove());
-        }
-    }
     public override void GetAllPositionMove()
     {
         GetPosition();
@@ -63,18 +31,6 @@ public class Rook : Chess
             CheckAndAddMoveToList(up);
             CheckAndAddMoveToList(down);
         }
-        GameManager.Instance.ShowColor(moves);
-    }
-    public override void GetPosition()
-    {
-        xBoard = (int)transform.position.x;
-        yBoard = (int)transform.position.y;
-    }
-
-    public override void ShowChessMove(Chess chess)
-    {
-        GetAllPositionMove();
-        index = Random.Range(0, moves.Count - 1);
-        random = new Vector2(moves[index].x, moves[index].y);
+        CheckMove(moves);
     }
 }

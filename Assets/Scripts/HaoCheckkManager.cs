@@ -11,8 +11,7 @@ public class HaoCheckkManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        baseChess.Fire();
-        rookChess.Fire();
+
     }
 
     // Update is called once per frame
