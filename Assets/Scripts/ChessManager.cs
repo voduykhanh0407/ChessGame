@@ -15,10 +15,6 @@ public class ChessManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        var chesses = GameObject.FindObjectsOfType<Chess>();
-        mainPlayer = chesses.FirstOrDefault(s => s.isPlayer);
-        enemies = chesses.Where(w => !w.isPlayer).Select(s => s).ToList();
     }
      
 
@@ -89,13 +85,13 @@ public class ChessManager : MonoBehaviour
     {
         if (!enemyTurn)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(3f);
 
             mainPlayer.PlayerShowMove(mainPlayer);
 
             enemyTurn = true;
         }
-        
+
     }
 
     public IEnumerator EnemyMoveTurn()
@@ -104,7 +100,7 @@ public class ChessManager : MonoBehaviour
         {
             foreach (var enemy in enemies)
             {
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(3f);
 
                 enemy.EnemyShowMove(enemy);
             }

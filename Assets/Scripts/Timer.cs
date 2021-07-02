@@ -30,9 +30,9 @@ public class Timer : MonoBehaviour
 
             StartCoroutine(ChessManager.Instance.PlayerMoveTurn());
 
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(2f);
 
-            StartCoroutine(ChessManager.Instance.EnemyMoveTurn());
+            //StartCoroutine(ChessManager.Instance.EnemyMoveTurn());
         }
     }
 }

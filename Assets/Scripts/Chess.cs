@@ -31,6 +31,15 @@ public class Chess : MonoBehaviour
         Instance = this;
     }
 
+
+
+    public virtual void Fire()
+    {
+        Debug.Log("this is Fire form base class");
+    }
+
+
+
     public virtual void PlayerShowMove(Chess chess)
     {
         chess.gameObject.AddComponent<Bishop>().PlayerShowMove(chess);

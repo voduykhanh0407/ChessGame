@@ -4,13 +4,13 @@ using UnityEngine;
 
 public interface IChess
 {
-    public void GetAllPositionMove();
+    void GetAllPositionMove();
 
-    public void CheckAndAddMoveToList(Vector2 pos);
+    void CheckAndAddMoveToList(Vector2 pos);
 
-    public void ShowChessMove();
+    void ShowChessMove();
 
-    public void ChessMove();
+    void ChessMove();
 
-    public void GetPosition();
+    void GetPosition();
 }

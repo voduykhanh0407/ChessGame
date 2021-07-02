@@ -24,6 +24,14 @@ public class Rook : Chess
             StartCoroutine(chess.ChessMove());
         }
     }
+
+
+    public override void Fire()
+    {
+        base.Fire();
+        Debug.Log("this is fire from Rook");
+    }
+
     public override void EnemyShowMove(Chess chess)
     {
         if (chess.type == ChessType.Rook)
