@@ -12,16 +12,13 @@ public class ChessManager : MonoBehaviour
 
     public static ChessManager Instance;
 
-
     private void Awake()
     {
         Instance = this;
-
     }
 
     public IEnumerator PlayerMoveTurn()
     {
-
         yield return new WaitForSeconds(0.2f);
 
         mainPlayer.ChessMove(mainPlayer);
@@ -33,7 +30,7 @@ public class ChessManager : MonoBehaviour
         {
             foreach (var enemy in enemies)
             {
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(0.3f);
 
                 enemy.ChessMove(enemy);
 

@@ -12,7 +12,7 @@ public class Chess : MonoBehaviour
 
     public static Chess Instance;
     public int xBoard = -1;
-    public int yBoard = -1 *1;
+    public int yBoard = -1;
 
     public int index = -1;
 
@@ -24,7 +24,6 @@ public class Chess : MonoBehaviour
     {
         Instance = this;
     }
-
 
     public virtual void ChessMove(Chess chess)
     {
