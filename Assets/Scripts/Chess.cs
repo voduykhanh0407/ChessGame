@@ -20,6 +20,9 @@ public class Chess : MonoBehaviour
 
     public List<Vector2> moves = new List<Vector2>();
 
+
+    public GameObject firePoint;
+
     private void Awake()
     {
         Instance = this;
@@ -61,9 +64,13 @@ public class Chess : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if (GameManager.kill == 1)
         {
-            transform.position = GameManager.Instance.killPos;
+            //transform.position = GameManager.Instance.killPos;
+
+            GameManager.Instance.Shoot(this);
+
             GameManager.kill = -1;
-            GameManager.Instance.CheckKill(this);
+
+            StartCoroutine(GameManager.Instance.CheckKill(this));
         }
         else
             transform.position = new Vector3(random.x, random.y, 0);

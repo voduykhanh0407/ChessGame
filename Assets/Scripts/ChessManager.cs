@@ -30,11 +30,11 @@ public class ChessManager : MonoBehaviour
         {
             foreach (var enemy in enemies)
             {
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.5f);
 
                 enemy.ChessMove(enemy);
 
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.5f);
             }
             enemyTurn = false;
         } 

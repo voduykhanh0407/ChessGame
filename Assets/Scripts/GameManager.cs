@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static int kill = -1;
 
-    public Vector3 killPos = Vector3.zero;
+    //public Vector3 killPos = Vector3.zero;
+
+    public Vector3 targetObj = Vector3.zero;
 
     public static GameManager Instance;
 
@@ -19,15 +21,17 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void CheckKill(Chess chess)
+    public IEnumerator CheckKill(Chess chess)
     {
         if (chess.isPlayer)
         {
+            yield return new WaitForSeconds(0.4f);
             UIController.Instance.AddPlayerScore();
             GridManager.Instance.RandomSpawn(enemyBox);
         }
         else
         {
+            yield return new WaitForSeconds(0.4f);
             UIController.Instance.AddEnemyScore();
             GridManager.Instance.RandomSpawn(playerBox);
         }
@@ -42,7 +46,9 @@ public class GameManager : MonoBehaviour
                 if (vector2 == new Vector2(enemy.transform.position.x, enemy.transform.position.y))
                 {
                     kill = 1;
-                    killPos = new Vector3(vector2.x, vector2.y, 0);
+                    //killPos = new Vector3(vector2.x, vector2.y, 0);
+
+                    targetObj = new Vector3(enemy.transform.position.x, enemy.transform.position.y,0);
 
                     enemyBox = enemy;
 
@@ -60,10 +66,18 @@ public class GameManager : MonoBehaviour
             if (vector2 == playerPos)
             {
                 kill = 1;
-                killPos = new Vector3(playerPos.x, playerPos.y, 0);
+                //killPos = new Vector3(playerPos.x, playerPos.y, 0);
+
+                targetObj = new Vector3(ChessManager.Instance.mainPlayer.transform.position.x, ChessManager.Instance.mainPlayer.transform.position.y, 0);
 
                 playerBox = ChessManager.Instance.mainPlayer;
             }
         }
+    }
+
+    public void Shoot(Chess chess)
+    {
+        SpawnProjectiles.Instance.SpawnVFX(chess);
+        ProjectileMove.Instance.targetPos = targetObj;
     }
 }

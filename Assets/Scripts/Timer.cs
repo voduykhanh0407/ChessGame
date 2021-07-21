@@ -13,11 +13,10 @@ public class Timer : MonoBehaviour
 
     public IEnumerator Timing()
     {
-        WaitForSeconds waitTime = new WaitForSeconds(0.5f);
+        WaitForSeconds waitTime = new WaitForSeconds(1f);
         while (loop)
         {
             yield return waitTime;
-
             if (ChessManager.Instance.enemyTurn == false)
             {
                 StartCoroutine(ChessManager.Instance.PlayerMoveTurn());
@@ -25,7 +24,7 @@ public class Timer : MonoBehaviour
                 ChessManager.Instance.enemyTurn = true;
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
 
             StartCoroutine(ChessManager.Instance.EnemyMoveTurn());
         }

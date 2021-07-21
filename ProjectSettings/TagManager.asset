@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Chess
+    uniqueID: 1678631125
+    locked: 0
+  - name: Bullet
+    uniqueID: 361301997
+    locked: 0
