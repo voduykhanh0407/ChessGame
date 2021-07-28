@@ -46,13 +46,13 @@ public class UIController : MonoBehaviour
     {
         if (playerScore == 3)
         {
-            Debug.Log("Victory");
-            SceneManager.LoadScene(1);
+            // Victory
+            LoadSceneManager.Instance.LoadScene(1);
         }
         if (enemyScore == 3)
         {
-            Debug.Log("Defeat");
-            SceneManager.LoadScene(2);
+            // Defeat
+            LoadSceneManager.Instance.LoadScene(2);
         }
     }
 }

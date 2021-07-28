@@ -50,13 +50,13 @@ public class GridManager : MonoBehaviour
         _cam.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
 
-    public void ShowChessPossibleMove(List<Vector2> moves)
+    public void ShowPlayerPossibleMove(List<Vector2> moves)
     {
         foreach (var move in moves)
         {
             if (dictionary.ContainsKey(move))
             {
-                dictionary[move].ChangeToMoveColor();
+                dictionary[move].ChangeToPlayerColor();
             }
         }
     }
@@ -73,13 +73,13 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void ShowChessPossibleDamage(List<Vector2> moves)
+    public void ShowEnemyPossibleMove(List<Vector2> moves)
     {
         foreach (var move in moves)
         {
             if (dictionary.ContainsKey(move))
             {
-                dictionary[move].ChangeToDamageColor();
+                dictionary[move].ChangeToEnemyColor();
             }
         }
     }

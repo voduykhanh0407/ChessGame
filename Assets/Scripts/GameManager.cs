@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     //public Vector3 killPos = Vector3.zero;
 
-    public Vector3 targetObj = Vector3.zero;
+    public Vector3 targetPosBox = Vector3.zero;
 
     public static GameManager Instance;
 
@@ -16,24 +16,28 @@ public class GameManager : MonoBehaviour
 
     public Chess playerBox;
 
+    public static bool isExplode = false;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    public IEnumerator CheckKill(Chess chess)
+    public void CheckKill(Chess chess)
     {
         if (chess.isPlayer)
         {
-            yield return new WaitForSeconds(0.4f);
             UIController.Instance.AddPlayerScore();
             GridManager.Instance.RandomSpawn(enemyBox);
+
+            CheckDestroyBullet();
         }
         else
         {
-            yield return new WaitForSeconds(0.4f);
             UIController.Instance.AddEnemyScore();
             GridManager.Instance.RandomSpawn(playerBox);
+
+            CheckDestroyBullet();
         }
     }
 
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
                     kill = 1;
                     //killPos = new Vector3(vector2.x, vector2.y, 0);
 
-                    targetObj = new Vector3(enemy.transform.position.x, enemy.transform.position.y,0);
+                    targetPosBox = new Vector3(enemy.transform.position.x, enemy.transform.position.y,0);
 
                     enemyBox = enemy;
 
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
                 kill = 1;
                 //killPos = new Vector3(playerPos.x, playerPos.y, 0);
 
-                targetObj = new Vector3(ChessManager.Instance.mainPlayer.transform.position.x, ChessManager.Instance.mainPlayer.transform.position.y, 0);
+                targetPosBox = new Vector3(ChessManager.Instance.mainPlayer.transform.position.x, ChessManager.Instance.mainPlayer.transform.position.y, 0);
 
                 playerBox = ChessManager.Instance.mainPlayer;
             }
@@ -78,6 +82,12 @@ public class GameManager : MonoBehaviour
     public void Shoot(Chess chess)
     {
         SpawnProjectiles.Instance.SpawnVFX(chess);
-        ProjectileMove.Instance.targetPos = targetObj;
+        ProjectileMove.Instance.targetPos = targetPosBox;
+    }
+
+    void CheckDestroyBullet()
+    {
+        ProjectileMove.Instance.DestroyBullet(isExplode);
+        isExplode = false;
     }
 }

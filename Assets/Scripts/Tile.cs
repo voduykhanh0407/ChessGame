@@ -18,13 +18,13 @@ public class Tile : MonoBehaviour
         _renderer.color = isBlack ? blackColor : whiteColor;
     }
 
-    public void ChangeToMoveColor()
+    public void ChangeToPlayerColor()
     {
         _renderer.color = moveColor;
 
     }
 
-    public void ChangeToDamageColor()
+    public void ChangeToEnemyColor()
     {
         _renderer.color = damageColor;
     }

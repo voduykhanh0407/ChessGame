@@ -20,6 +20,7 @@ public class Chess : MonoBehaviour
 
     public List<Vector2> moves = new List<Vector2>();
 
+    public static Chess chessBox;
 
     public GameObject firePoint;
 
@@ -64,13 +65,12 @@ public class Chess : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         if (GameManager.kill == 1)
         {
+            chessBox = this;
             //transform.position = GameManager.Instance.killPos;
 
             GameManager.Instance.Shoot(this);
 
             GameManager.kill = -1;
-
-            StartCoroutine(GameManager.Instance.CheckKill(this));
         }
         else
             transform.position = new Vector3(random.x, random.y, 0);
@@ -83,12 +83,12 @@ public class Chess : MonoBehaviour
     {
         if (isPlayer)
         {
-            GridManager.Instance.ShowChessPossibleMove(vector2);
+            GridManager.Instance.ShowPlayerPossibleMove(vector2);
             GameManager.Instance.OnPlayerKill(vector2);
         }
         else
         {
-            GridManager.Instance.ShowChessPossibleDamage(vector2);
+            GridManager.Instance.ShowEnemyPossibleMove(vector2);
             GameManager.Instance.OnEnemyKill(vector2);
         }
     }
