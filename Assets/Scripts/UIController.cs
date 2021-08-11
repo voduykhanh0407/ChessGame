@@ -8,11 +8,13 @@ public class UIController : MonoBehaviour
 {
     public static UIController Instance;
 
-    public int playerScore;
-    public int enemyScore;
+    public int playerScore = 0;
+    public int enemyScore = 0;
 
     public Text playerText;
     public Text enemyText;
+
+    int x = 0;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class UIController : MonoBehaviour
         OnEndGame();
         playerText.text = "Player: " + playerScore;
         enemyText.text = "Enemy: " + enemyScore;
+        x++;
     }
 
     public void AddPlayerScore()
@@ -46,11 +49,13 @@ public class UIController : MonoBehaviour
     {
         if (playerScore == 3)
         {
+            playerScore = 0;
             // Victory
             LoadSceneManager.Instance.LoadScene(1);
         }
         if (enemyScore == 3)
         {
+            enemyScore = 0;
             // Defeat
             LoadSceneManager.Instance.LoadScene(2);
         }

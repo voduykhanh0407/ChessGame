@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,59 +8,81 @@ public class LoadSceneManager : MonoBehaviour
     public static LoadSceneManager Instance;
 
     [SerializeField] private GameObject loadSceneCanvas;
-    [SerializeField] private Slider slider;
+    [SerializeField] private Image progressBar;
 
-    ////private float loading;
-    
+    AsyncOperation operation;
+    private float progress;
+
+    private float t = 0f;
+    private float timeToLoad = 5f;
+
+    private float max = 1f;
+
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public IEnumerator LoadingProgressBar()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(operation.progress > 0.1f)
+        {
+            StartCoroutine(LoadingProgressBarFake());
+            //Debug.Log("Fake");
+        }
+        else
+        {
+            StartCoroutine(LoadingProgressBarReal());
+            //Debug.Log("Real");
+        }
+    }
+
+    public IEnumerator LoadingProgressBarFake()
+    {
+        t = 0;
+        progressBar.fillAmount = 0;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / timeToLoad;
+            progressBar.fillAmount = Mathf.Lerp(0, max, t);
+            yield return new WaitForSeconds(0f);
+            if (progressBar.fillAmount == 1f)
+            {
+                loadSceneCanvas.SetActive(false);
+            }
+        }
+    }
+
+    public IEnumerator LoadingProgressBarReal()
+    {
+        progressBar.fillAmount = 0;
+        while (!operation.isDone)
+        {
+            progress = Mathf.Clamp01(operation.progress / 0.9f);
+
+            progressBar.fillAmount = progress;
+            yield return new WaitForSeconds(0f);
+            if (progressBar.fillAmount == 1f)
+            {
+                loadSceneCanvas.SetActive(false);
+            }
+        }
     }
 
     public void LoadScene(int sceneIndex)
     {
-        StartCoroutine(LoadAsynchronously(sceneIndex));
-    }
-
-    IEnumerator LoadAsynchronously(int sceneIndex)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-
         loadSceneCanvas.SetActive(true);
 
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+        LoadAsynchronously(sceneIndex);
 
-            slider.value = progress;
-
-            yield return null;
-        }
+        StartCoroutine(LoadingProgressBar());
     }
 
-    //private void Update()
-    //{
-    //    slider.value = Mathf.MoveTowards(slider.value, loading, 3 * Time.deltaTime);
-    //}
+    void LoadAsynchronously(int sceneIndex)
+    {
+        operation = SceneManager.LoadSceneAsync(sceneIndex);
+    }
 
-    //public async void LoadScene(string sceneName)
-    //{
-    //    //loading = 0;
-    //    //slider.value = 0;
-
-    //    var scene = SceneManager.LoadSceneAsync(sceneName);
-    //    scene.allowSceneActivation = false;
-
-    //    loadSceneCanvas.SetActive(true);
-
-    //    do
-    //    {
-    //        await Task.Delay(100);
-    //        slider.value = scene.progress;
-    //    }
-    //    while (scene.progress < 0.9f);
-
-    //    scene.allowSceneActivation = true;
-    //    loadSceneCanvas.SetActive(false);
-    //}
 }

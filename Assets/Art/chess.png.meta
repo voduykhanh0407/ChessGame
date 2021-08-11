@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 9137956268137911521
     second: chess_1
+  - first:
+      213: 1616936152527710571
+    second: chess_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -126,7 +129,7 @@ TextureImporter:
         width: 43
         height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,6 +137,27 @@ TextureImporter:
       bones: []
       spriteID: 1e41a679fca80de70800000000000000
       internalID: 9137956268137911521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chess_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 356
+        width: 14
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b69a6e32dd2807610800000000000000
+      internalID: 1616936152527710571
       vertices: []
       indices: 
       edges: []
